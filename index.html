@@ -6,25 +6,28 @@
     <script type="text/javascript" src="js/Environment.js"></script>
     <script type="text/javascript" src="js/Simulation.js"></script>
     <script type="text/javascript" src="js/Renderer.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div id="main"></div>
     <script>
         var env = new Environment();
         var flyer = new Flyer();
-        flyer.setPosition(0, 50);
+        flyer.setPosition(0, 15);
 
         var sim = new Simulation(env);
         sim.addFlyer(flyer);
 
+        // scale is in pixels per meter
+
         var renderer = new Renderer({
             sim: sim,
-            view: $('main'),
-            scale: 100
+            view: $('#main'),
+            scale: 30
         });
 
         sim.start();
     </script>
-    <link rel="stylesheet" href="css/index.css">
-</head>
-<body>
-    <canvas id="main"></canvas>
+
 </body>
 </html>
