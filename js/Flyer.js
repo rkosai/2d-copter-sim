@@ -23,3 +23,8 @@ Flyer.prototype.setPosition = function(x, y) {
     this.linear.x = x;
     this.linear.y = y;
 };
+
+Flyer.prototype.setController = function (ctrl) {
+    this.controller = ctrl;
+};
+

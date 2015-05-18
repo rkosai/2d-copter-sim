@@ -2,10 +2,11 @@
 <html>
 <head>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script type="text/javascript" src="js/Flyer.js"></script>
     <script type="text/javascript" src="js/Environment.js"></script>
-    <script type="text/javascript" src="js/Simulation.js"></script>
+    <script type="text/javascript" src="js/Flyer.js"></script>
+    <script type="text/javascript" src="js/KeyControls.js"></script>
     <script type="text/javascript" src="js/Renderer.js"></script>
+    <script type="text/javascript" src="js/Simulation.js"></script>
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
@@ -13,6 +14,9 @@
     <script>
         var env = new Environment();
         var flyer = new Flyer();
+        var kc = new KeyControls();
+
+        flyer.setController(kc);
         flyer.setPosition(0, 15);
 
         var sim = new Simulation(env);
