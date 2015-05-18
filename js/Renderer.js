@@ -124,6 +124,30 @@ Renderer.prototype._makeCanvas = function() {
 };
 
 Renderer.prototype.render = function() {
-    //console.log('render');
+    this._drawFlyers();
 };
 
+Renderer.prototype._drawFlyers = function() {
+    var ctx = this.canvas.flyer[0].getContext('2d');
+    var dim = this.dimensions;
+
+    // Clear the flyer canvas
+    ctx.clearRect(0, 0, dim.w, dim.h);
+
+    // Draw the flyers
+    var flyers = this.sim.getFlyers();
+    for (var i = 0 ; i < flyers.length; i++) {
+        var f = flyers[i];
+        var center = this._physicalToPixel({
+            x: f.linear.x,
+            y: f.linear.y
+        });
+
+        ctx.save();
+        ctx.translate(center.x, center.y);
+        ctx.rotate(f.angular.theta);
+        ctx.fillStyle = '#555';
+        ctx.fillRect(-0.5 * dim.scale, 0, 1 * dim.scale, -3);
+        ctx.restore();
+    }
+};

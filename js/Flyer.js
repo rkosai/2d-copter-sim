@@ -13,7 +13,7 @@ function Flyer() {
 
     // kilograms, kilogram * meters**2
     this.state = {
-        engine_distance: 0.1,
+        engine_distance: 0.5,
         mass: 10,
         moment_inertia: 1
     };
