@@ -125,6 +125,9 @@ Renderer.prototype._makeCanvas = function() {
 
 Renderer.prototype.render = function() {
     this._drawFlyers();
+
+    // TBD: remove me.
+    this._checkFlyerBounds();
 };
 
 Renderer.prototype._drawFlyers = function() {
@@ -145,9 +148,31 @@ Renderer.prototype._drawFlyers = function() {
 
         ctx.save();
         ctx.translate(center.x, center.y);
-        ctx.rotate(f.angular.theta);
+        ctx.rotate(-1 * f.angular.theta);
         ctx.fillStyle = '#555';
         ctx.fillRect(-0.5 * dim.scale, 0, 1 * dim.scale, -3);
+        ctx.fillRect(-0.2 * dim.scale, -3, 0.4 * dim.scale, -4);
+
         ctx.restore();
+    }
+};
+
+Renderer.prototype._checkFlyerBounds = function() {
+    var flyers = this.sim.getFlyers();
+    for (var i = 0; i < flyers.length; i++) {
+        var f = flyers[i];
+
+        var center = this._physicalToPixel({
+            x: f.linear.x,
+            y: f.linear.y
+        });
+
+        if ((center.x < 0) || (center.x > this.dimensions.w)){
+            f.reset();
+        }
+
+        if (center.y < 0) {
+            f.reset();
+        }
     }
 };
