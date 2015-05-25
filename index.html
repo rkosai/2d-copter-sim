@@ -8,9 +8,57 @@
     <script type="text/javascript" src="js/Renderer.js"></script>
     <script type="text/javascript" src="js/Simulation.js"></script>
     <link rel="stylesheet" href="css/index.css">
+
 </head>
 <body>
     <div id="main"></div>
+    <div id="pane">
+        <div class="heading">CONTROLLER</div>
+        <div class="display">
+            <a class="box selected" href="#">MANUAL</a>
+            <a class="box" href="#">STABILIZE</a>
+            <a class="box" href="#">AUTOPILOT</a>
+        </div>
+        <div class="heading">FLIGHT HISTORY</div>
+        <div class="display">
+            <a class="box selected" href="#">NONE</a>
+            <a class="box" href="#">DOTS</a>
+            <a class="box" href="#">PATH</a>
+        </div>
+        <div class="heading">METRICS</div>
+        <div class="display">
+            <div class="chart-title">Force</div>
+            <div class="chart-container">
+                <div class="chart">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="chart-title">Angular Velocity</div>
+            <div class="chart-container">
+                <div class="chart">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="chart-title">Linear Velocity</div>
+            <div class="chart-container">
+                <div class="chart">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="chart-title">Angular Position</div>
+            <div class="chart-container">
+                <div class="chart">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="chart-title">Linear Position</div>
+            <div class="chart-container">
+                <div class="chart">
+                    &nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         var env = new Environment();
         var flyer = new Flyer();
@@ -32,6 +80,5 @@
 
         sim.start();
     </script>
-
 </body>
 </html>

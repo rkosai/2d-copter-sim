@@ -6,3 +6,64 @@ body {
     background: #555;
     position: relative;
 }
+
+#pane {
+    background: #EEE;
+    border-left:3px solid #777;
+    box-sizing: border-box;
+    height: 100%;
+    overflow: auto;
+    padding: 10px 15px;
+    position:absolute;
+    right: 0;
+    top: 0;
+    width: 400px;
+}
+
+#pane .heading {
+    font-size: 13px;
+    color: #333;
+    padding: 3px 0;
+    border-bottom: 1px dashed #888;
+}
+
+#pane .display {
+    position:relative;
+    padding: 12px 0 16px 0;
+}
+
+#pane .box {
+    border: 2px solid #BBB;
+    box-sizing: border-box;
+    color: #AAA;
+    display: inline-block;
+    font-size:13px;
+    margin-right:10px;
+    padding:3px 8px;
+    text-align:center;
+    text-decoration: none;
+    width: 100px;
+}
+
+#pane .box.selected {
+    color: #0A0;
+    border: 3px solid #0A0;
+}
+
+#pane .chart-title {
+    font-size: 13px;
+    color: #777;
+    padding: 3px 0;
+}
+
+#pane .chart-container {
+    margin-top:3px;
+    margin-bottom:10px;
+}
+
+#pane .chart {
+    background: #EEE;
+    border-bottom: 1px solid #BBB;
+    border-left: 1px solid #BBB;
+    height: 80px;
+}
