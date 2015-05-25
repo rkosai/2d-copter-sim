@@ -1,8 +1,8 @@
 function Simulation(env) {
-    this.step = 0.01;
+    this.step = 0.02;
     this.env = env;
     this.flyers = [];
-    this._tickCompleteHandler = null;
+    this._tickCompleteHandlers = [];
     this.time = 0;
 
 }
@@ -27,16 +27,21 @@ Simulation.prototype._tick = function() {
         this._tickFlyer(this.flyers[i]);
     }
 
-    if (this._tickCompleteHandler) {
-        this._tickCompleteHandler();
+    if (this._tickCompleteHandlers.length > 0) {
+        for (var i = 0; i < this._tickCompleteHandlers.length; i++) {
+            this._tickCompleteHandlers[i](this.time);
+        };
     }
 };
 
 Simulation.prototype._tickFlyer = function(flyer) {
+    flyer.sensors.update();
+
     // Apply gravity
     flyer.linear.v_y += this.step * -9.81;
 
     // Check for thrust
+    // TBD: fix this interface
     if (flyer.controller) {
         var state = flyer.controller.getState();
 
@@ -49,6 +54,10 @@ Simulation.prototype._tickFlyer = function(flyer) {
         // Torque adjustments
         flyer.angular.velocity += this.step * state.e / flyer.state.moment_inertia;
         flyer.angular.velocity -= this.step * state.q / flyer.state.moment_inertia;
+
+        // Update flyer state
+        flyer.engines.left = state.q;
+        flyer.engines.right = state.e;
     }
 
     // TBD: Apply terminal velocity
@@ -73,5 +82,5 @@ Simulation.prototype._tickFlyer = function(flyer) {
 };
 
 Simulation.prototype.onTickComplete = function(func) {
-    this._tickCompleteHandler = func;
+    this._tickCompleteHandlers.push(func);
 };

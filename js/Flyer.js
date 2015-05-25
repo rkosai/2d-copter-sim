@@ -7,6 +7,8 @@ function Flyer() {
     };
 
     this.reset();
+
+    this.sensors = new Sensors(this);
 }
 
 Flyer.prototype.setPosition = function(x, y) {
@@ -29,5 +31,10 @@ Flyer.prototype.reset = function() {
     this.angular = {
         theta: 0,
         velocity: 0
+    };
+
+    this.engines = {
+        left: 0,
+        right: 0
     };
 };
