@@ -3,6 +3,7 @@ function Simulation(env) {
     this.env = env;
     this.flyers = [];
     this._tickCompleteHandlers = [];
+    this._resetHandlers = [];
     this.time = 0;
 
 }
@@ -62,7 +63,7 @@ Simulation.prototype._tickFlyer = function(flyer) {
 
     // TBD: Apply terminal velocity
 
-    // If the flyer is at the ground, stop
+    // If the flyer is at the ground, reset the simulation
     if (flyer.linear.y <= 0) {
         flyer.linear.y = 0;
         flyer.angular.theta = 0;
@@ -70,6 +71,10 @@ Simulation.prototype._tickFlyer = function(flyer) {
         if (flyer.linear.v_y < 0) {
             flyer.linear.v_y = 0;
             flyer.angular.velocity = 0;
+        }
+
+        for (var i = 0; i < this._resetHandlers.length; i++) {
+            this._resetHandlers[i]();
         }
     }
 
@@ -83,4 +88,8 @@ Simulation.prototype._tickFlyer = function(flyer) {
 
 Simulation.prototype.onTickComplete = function(func) {
     this._tickCompleteHandlers.push(func);
+};
+
+Simulation.prototype.onSimulationReset = function(func) {
+    this._resetHandlers.push(func);
 };

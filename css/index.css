@@ -63,7 +63,6 @@ body {
 
 #pane .chart {
     background: #EEE;
-    border-bottom: 1px solid #BBB;
     border-left: 1px solid #BBB;
-    height: 80px;
+    height: 60px;
 }

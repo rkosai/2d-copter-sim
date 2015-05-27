@@ -4,6 +4,7 @@ function Renderer(opts) {
     this.sim = opts.sim;
     this.view = opts.view;
     this.canvas = {};
+    this.ctx = {};
 
     this.dimensions = {
         h: $(window).height(),
@@ -28,6 +29,9 @@ Renderer.prototype._initializeView = function() {
     this.canvas.background = this._generateBackground();
     this.canvas.dots = this._makeCanvas();
     this.canvas.flyer = this._makeCanvas();
+
+    // Store the context for performance
+    this.ctx.flyer = this.canvas.flyer[0].getContext('2d');
 };
 
 Renderer.prototype._generateBackground = function() {
@@ -131,7 +135,7 @@ Renderer.prototype.render = function() {
 };
 
 Renderer.prototype._drawFlyers = function() {
-    var ctx = this.canvas.flyer[0].getContext('2d');
+    var ctx = this.ctx.flyer;
     var dim = this.dimensions;
 
     // Clear the flyer canvas

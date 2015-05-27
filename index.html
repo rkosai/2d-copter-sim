@@ -29,35 +29,29 @@
         </div>
         <div class="heading">SENSOR DATA</div>
         <div class="display">
-            <div class="chart-title">Force</div>
+            <div class="chart-title">Left Engine</div>
             <div class="chart-container">
-                <div class="chart">
-                    &nbsp;
-                </div>
+                <div id="chart_left" class="chart"></div>
+            </div>
+            <div class="chart-title">Right Engine</div>
+            <div class="chart-container">
+                <div id="chart_right" class="chart"></div>
             </div>
             <div class="chart-title">Angular Velocity</div>
             <div class="chart-container">
-                <div class="chart">
-                    &nbsp;
-                </div>
+                <div id="chart_v_angular" class="chart"></div>
             </div>
-            <div class="chart-title">Linear Velocity</div>
+            <div class="chart-title">Vertical Velocity</div>
             <div class="chart-container">
-                <div class="chart">
-                    &nbsp;
-                </div>
+                <div id="chart_v_y" class="chart"></div>
+            </div>
+            <div class="chart-title">Horizontal Velocity</div>
+            <div class="chart-container">
+                <div id="chart_v_x" class="chart"></div>
             </div>
             <div class="chart-title">Angular Position</div>
             <div class="chart-container">
-                <div class="chart">
-                    &nbsp;
-                </div>
-            </div>
-            <div class="chart-title">Linear Position</div>
-            <div class="chart-container">
-                <div class="chart">
-                    &nbsp;
-                </div>
+                <div id="chart_pos_angular" class="chart"></div>
             </div>
         </div>
     </div>
@@ -82,40 +76,55 @@
 
         // Set up charts
         var charts = {
-            force: new Chart({
-                view: $('#chart_force'),
+            left: new Chart({
+                view: $('#chart_left'),
                 data: function () {
-                    return [
-                        flyer.sensor.left_engine,
-                        flyer.sensor.right_engine
-                    ];
+                    return flyer.sensors.engines.left;
                 },
                 max: 20,
-                min: 0
+                min: 0,
+                fill: true
+            }),
+            right: new Chart({
+                view: $('#chart_right'),
+                data: function () {
+                    return flyer.sensors.engines.right;
+                },
+                max: 20,
+                min: 0,
+                fill: true
             }),
             angular_velocity: new Chart({
                 view: $('#chart_v_angular'),
                 data: function () {
-                    return [flyer.sensor.angular_velocity];
+                    return flyer.sensors.velocity.theta;
                 },
-                max: 2 * Math.PI,
-                min: -2 * Math.PI
+                max: Math.PI / 2,
+                min: -1 * Math.PI / 2,
+                fill: true
             }),
-            linear_velocity: new Chart({
-                view: $('#chart_v_angular'),
+            linear_velocity_y: new Chart({
+                view: $('#chart_v_y'),
                 data: function () {
-                    return [
-                        flyer.sensor.x_velocity,
-                        flyer.sensor.y_velocity
-                    ];
+                    return flyer.sensors.velocity.y;
                 },
                 max: 30,
-                min: -30
+                min: -30,
+                fill: true
+            }),
+            linear_velocity_x: new Chart({
+                view: $('#chart_v_x'),
+                data: function () {
+                    return flyer.sensors.velocity.x;
+                },
+                max: 30,
+                min: -30,
+                fill: true
             }),
             angular_position: new Chart({
                 view: $('#chart_pos_angular'),
                 data: function () {
-                    return [flyer.sensor.angular_position];
+                    return flyer.sensors.position.theta;
                 },
                 max: Math.PI,
                 min: -1 * Math.PI
@@ -126,6 +135,12 @@
         sim.onTickComplete(function() {
             for (var key in charts) {
                 charts[key].update();
+            };
+        });
+
+        sim.onSimulationReset(function() {
+            for (var key in charts) {
+                charts[key].reset();
             };
         });
 

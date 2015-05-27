@@ -22,7 +22,7 @@ Sensors.prototype.update = function() {
     // TBD introduce variance options
 
     this.engines.left = this.flyer.engines.left;
-    this.engines.left = this.flyer.engines.right;
+    this.engines.right = this.flyer.engines.right;
 
     this.velocity.x = this.flyer.linear.v_x;
     this.velocity.y = this.flyer.linear.v_y;
@@ -30,5 +30,11 @@ Sensors.prototype.update = function() {
 
     this.position.x = this.flyer.linear.x;
     this.position.y = this.flyer.linear.y;
-    this.position.theta = this.flyer.angular.theta;
+
+    // Set angular position
+    var t = this.flyer.angular.theta % (Math.PI * 2);
+    if (t > Math.PI) {
+        t -= 2 * Math.PI;
+    }
+    this.position.theta = t;
 };
