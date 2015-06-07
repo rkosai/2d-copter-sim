@@ -44,21 +44,21 @@ Simulation.prototype._tickFlyer = function(flyer) {
     // Check for thrust
     // TBD: fix this interface
     if (flyer.controller) {
-        var state = flyer.controller.getState();
+        var thrust = flyer.controller.getThrust();
 
         // Linear adjustments
-        flyer.linear.v_y += this.step * state.q * Math.cos(flyer.angular.theta);
-        flyer.linear.v_y += this.step * state.e * Math.cos(flyer.angular.theta);
-        flyer.linear.v_x -= this.step * state.q * Math.sin(flyer.angular.theta);
-        flyer.linear.v_x -= this.step * state.e * Math.sin(flyer.angular.theta);
+        flyer.linear.v_y += this.step * thrust.left * Math.cos(flyer.angular.theta);
+        flyer.linear.v_y += this.step * thrust.right * Math.cos(flyer.angular.theta);
+        flyer.linear.v_x -= this.step * thrust.left * Math.sin(flyer.angular.theta);
+        flyer.linear.v_x -= this.step * thrust.right * Math.sin(flyer.angular.theta);
 
         // Torque adjustments
-        flyer.angular.velocity += this.step * state.e / flyer.state.moment_inertia;
-        flyer.angular.velocity -= this.step * state.q / flyer.state.moment_inertia;
+        flyer.angular.velocity += this.step * thrust.right / flyer.state.moment_inertia;
+        flyer.angular.velocity -= this.step * thrust.left / flyer.state.moment_inertia;
 
         // Update flyer state
-        flyer.engines.left = state.q;
-        flyer.engines.right = state.e;
+        flyer.engines.left = thrust.left;
+        flyer.engines.right = thrust.right;
     }
 
     // TBD: Apply terminal velocity

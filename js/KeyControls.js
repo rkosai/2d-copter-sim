@@ -21,10 +21,10 @@ function KeyControls() {
     }.bind(this));
 }
 
-KeyControls.prototype.getState = function() {
+KeyControls.prototype.getThrust = function() {
     return ({
-        q: this.q ? 20 : 0,
-        e: this.e ? 20 : 0
+        left: this.q ? 20 : 0,
+        right: this.e ? 20 : 0
     });
 };
 
