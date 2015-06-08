@@ -35,42 +35,42 @@ Simulation.prototype._tick = function() {
     }
 };
 
-Simulation.prototype._tickFlyer = function(flyer) {
-    flyer.sensors.update();
+Simulation.prototype._tickFlyer = function(f) {
+    f.sensors.update();
 
     // Apply gravity
-    flyer.linear.v_y += this.step * -9.81;
+    f.linear.v_y += this.step * -9.81;
 
     // Check for thrust
     // TBD: fix this interface
-    if (flyer.controller) {
-        var thrust = flyer.controller.getThrust();
+    if (f.controller) {
+        var thrust = f.controller.getThrust(f.sensors);
 
         // Linear adjustments
-        flyer.linear.v_y += this.step * thrust.left * Math.cos(flyer.angular.theta);
-        flyer.linear.v_y += this.step * thrust.right * Math.cos(flyer.angular.theta);
-        flyer.linear.v_x -= this.step * thrust.left * Math.sin(flyer.angular.theta);
-        flyer.linear.v_x -= this.step * thrust.right * Math.sin(flyer.angular.theta);
+        f.linear.v_y += this.step * thrust.left * Math.cos(f.angular.theta);
+        f.linear.v_y += this.step * thrust.right * Math.cos(f.angular.theta);
+        f.linear.v_x -= this.step * thrust.left * Math.sin(f.angular.theta);
+        f.linear.v_x -= this.step * thrust.right * Math.sin(f.angular.theta);
 
         // Torque adjustments
-        flyer.angular.velocity += this.step * thrust.right / flyer.state.moment_inertia;
-        flyer.angular.velocity -= this.step * thrust.left / flyer.state.moment_inertia;
+        f.angular.velocity += this.step * thrust.right / f.state.moment_inertia;
+        f.angular.velocity -= this.step * thrust.left / f.state.moment_inertia;
 
-        // Update flyer state
-        flyer.engines.left = thrust.left;
-        flyer.engines.right = thrust.right;
+        // Update f state
+        f.engines.left = thrust.left;
+        f.engines.right = thrust.right;
     }
 
     // TBD: Apply terminal velocity
 
-    // If the flyer is at the ground, reset the simulation
-    if (flyer.linear.y <= 0) {
-        flyer.linear.y = 0;
-        flyer.angular.theta = 0;
+    // If the f is at the ground, reset the simulation
+    if (f.linear.y <= 0) {
+        f.linear.y = 0;
+        f.angular.theta = 0;
 
-        if (flyer.linear.v_y < 0) {
-            flyer.linear.v_y = 0;
-            flyer.angular.velocity = 0;
+        if (f.linear.v_y < 0) {
+            f.linear.v_y = 0;
+            f.angular.velocity = 0;
         }
 
         for (var i = 0; i < this._resetHandlers.length; i++) {
@@ -79,11 +79,11 @@ Simulation.prototype._tickFlyer = function(flyer) {
     }
 
     // Adjust linear position based on velocities
-    flyer.linear.y += flyer.linear.v_y * this.step;
-    flyer.linear.x += flyer.linear.v_x * this.step;
+    f.linear.y += f.linear.v_y * this.step;
+    f.linear.x += f.linear.v_x * this.step;
 
     // Adjust angular position based on velocities
-    flyer.angular.theta += flyer.angular.velocity;
+    f.angular.theta += f.angular.velocity;
 };
 
 Simulation.prototype.onTickComplete = function(func) {

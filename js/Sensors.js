@@ -1,5 +1,6 @@
 function Sensors(flyer) {
-    this.flyer = flyer;
+    this._flyer = flyer;
+
     this.engines = {
         left: 0,
         right: 0
@@ -20,19 +21,20 @@ function Sensors(flyer) {
 
 Sensors.prototype.update = function() {
     // TBD introduce variance options
+    var f = this._flyer;
 
-    this.engines.left = this.flyer.engines.left;
-    this.engines.right = this.flyer.engines.right;
+    this.engines.left = f.engines.left;
+    this.engines.right = f.engines.right;
 
-    this.velocity.x = this.flyer.linear.v_x;
-    this.velocity.y = this.flyer.linear.v_y;
-    this.velocity.theta = this.flyer.angular.velocity;
+    this.velocity.x = f.linear.v_x;
+    this.velocity.y = f.linear.v_y;
+    this.velocity.theta = f.angular.velocity;
 
-    this.position.x = this.flyer.linear.x;
-    this.position.y = this.flyer.linear.y;
+    this.position.x = f.linear.x;
+    this.position.y = f.linear.y;
 
     // Set angular position
-    var t = this.flyer.angular.theta % (Math.PI * 2);
+    var t = f.angular.theta % (Math.PI * 2);
     if (t > Math.PI) {
         t -= 2 * Math.PI;
     }
