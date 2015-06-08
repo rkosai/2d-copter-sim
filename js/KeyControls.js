@@ -49,11 +49,11 @@ KeyControls.prototype.getThrust = function(sensors) {
 
 KeyControls.prototype._targetDelta = function(sensors, target) {
     var dx = sensors.position.x +
-             sensors.velocity.x * this.env.step * 10 -
+             sensors.velocity.x * this.env.step * 30 -
              target.x;
 
     var dy = sensors.position.y +
-             sensors.velocity.y * this.env.step * 10 -
+             sensors.velocity.y * this.env.step * 30 -
              target.y;
 
     return { dx: dx, dy: dy };
@@ -74,7 +74,9 @@ KeyControls.prototype._stabilize = function(sensors) {
     var t = this._targetDelta(sensors, this.session);
 
     // Drive future angle to zero
-    var s = sensors.position.theta + sensors.velocity.theta * this.env.step * 10;
+    var s = sensors.position.theta +
+            sensors.velocity.theta * this.env.step * 15 -
+            t.dx * 0.05;
 
     if (s > 0.05) {
         left = Math.min(s * 150, 4);

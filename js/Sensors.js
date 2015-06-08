@@ -38,5 +38,9 @@ Sensors.prototype.update = function() {
     if (t > Math.PI) {
         t -= 2 * Math.PI;
     }
+    else if (t < -1 * Math.PI) {
+        t += 2 * Math.PI;
+    }
+    console.log(t);
     this.position.theta = t;
 };
