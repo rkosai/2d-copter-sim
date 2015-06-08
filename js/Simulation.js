@@ -1,6 +1,6 @@
 function Simulation(env) {
-    this.step = 0.02;
     this.env = env;
+    this.step = env.step;
     this.flyers = [];
     this._tickCompleteHandlers = [];
     this._resetHandlers = [];
@@ -83,7 +83,7 @@ Simulation.prototype._tickFlyer = function(f) {
     f.linear.x += f.linear.v_x * this.step;
 
     // Adjust angular position based on velocities
-    f.angular.theta += f.angular.velocity;
+    f.angular.theta += f.angular.velocity * this.step;
 };
 
 Simulation.prototype.onTickComplete = function(func) {

@@ -3,7 +3,7 @@ function Flyer() {
     this.state = {
         engine_distance: 0.5,
         mass: 10,
-        moment_inertia: 50
+        moment_inertia: 1
     };
 
     this.reset();

@@ -1,4 +1,6 @@
 function KeyControls() {
+    this.env = new Environment();
+
     this.q = false; // 81
     this.e = false; // 69
     this.w = false; // 87
@@ -46,8 +48,13 @@ KeyControls.prototype.getThrust = function(sensors) {
 };
 
 KeyControls.prototype._targetDelta = function(sensors, target) {
-    var dx = sensors.position.x + sensors.velocity.x - target.x;
-    var dy = sensors.position.y + sensors.velocity.y - target.y;
+    var dx = sensors.position.x +
+             sensors.velocity.x * this.env.step * 10 -
+             target.x;
+
+    var dy = sensors.position.y +
+             sensors.velocity.y * this.env.step * 10 -
+             target.y;
 
     return { dx: dx, dy: dy };
 };
@@ -67,7 +74,7 @@ KeyControls.prototype._stabilize = function(sensors) {
     var t = this._targetDelta(sensors, this.session);
 
     // Drive future angle to zero
-    var s = sensors.position.theta + sensors.velocity.theta;
+    var s = sensors.position.theta + sensors.velocity.theta * this.env.step * 10;
 
     if (s > 0.05) {
         left = Math.min(s * 150, 4);
@@ -80,18 +87,18 @@ KeyControls.prototype._stabilize = function(sensors) {
 
     // If we're off to the right, move it over a bit.
     if (t.dx > 1) {
-        right += Math.min(t.dx * 0.10, 0.5);
+        right += Math.min(t.dx * 0.1, 0.5);
     }
     else if (t.dx < -1) {
-        left += Math.min(Math.abs(t.dx) * 0.10, 0.5);
+        left += Math.min(Math.abs(t.dx) * 0.1, 0.5);
     }
 
     // If we're below the target height, and we're pointed in the right
     // direction, run both engines.
 
-    if ( (t.dy < 0.5) && (Math.abs(s) < (Math.PI / 4)) ) {
-        left += Math.min(Math.abs(t.dy) * 3, 12);
-        right += Math.min(Math.abs(t.dy) * 3, 12);
+    if ( (t.dy < 0.1) && (Math.abs(s) < (Math.PI / 4)) ) {
+        left += Math.min(Math.abs(t.dy) * 10, 15);
+        right += Math.min(Math.abs(t.dy) * 10, 15);
     }
 
     return {
