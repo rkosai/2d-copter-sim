@@ -3,9 +3,9 @@ function PositionControl() {
     this.lock = { x: 0, y: 0 };
 }
 
-PositionControl.prototype.lockPosition = function(sensors) {
-    this.lock.x = sensors.position.x;
-    this.lock.y = sensors.position.y;
+PositionControl.prototype.lockPosition = function(coord) {
+    this.lock.x = coord.x;
+    this.lock.y = coord.y;
 };
 
 PositionControl.prototype.getThrust = function(sensors) {

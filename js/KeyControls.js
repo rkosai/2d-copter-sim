@@ -35,7 +35,7 @@ function KeyControls() {
 
 KeyControls.prototype.getThrust = function(sensors) {
     if (this.lockLatch) {
-        this.autopilot.lockPosition(sensors);
+        this.autopilot.lockPosition(sensors.position);
         this.lockLatch = false;
     }
 

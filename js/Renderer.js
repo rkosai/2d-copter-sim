@@ -114,6 +114,19 @@ Renderer.prototype._physicalToPixel = function(coord) {
     };
 };
 
+Renderer.prototype._pixelToPhysical = function(coord) {
+    var dim = this.dimensions;
+
+    var zeroX = Math.floor(dim.w / 2);
+    var height = dim.h - Renderer.GROUND_OFFSET;
+
+    return {
+        x: (coord.x - zeroX) / dim.scale,
+        y: (height - coord.y) / dim.scale
+    };
+
+};
+
 Renderer.prototype._makeCanvas = function() {
     var dim = this.dimensions;
 

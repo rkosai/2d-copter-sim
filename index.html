@@ -3,6 +3,7 @@
 <head>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript" src="js/Chart.js"></script>
+    <script type="text/javascript" src="js/ClickControls.js"></script>
     <script type="text/javascript" src="js/Sensors.js"></script>
     <script type="text/javascript" src="js/Environment.js"></script>
     <script type="text/javascript" src="js/Flyer.js"></script>
@@ -58,22 +59,24 @@
     </div>
     <script>
         var env = new Environment();
-        var flyer = new Flyer();
-        var kc = new KeyControls();
-
-        flyer.setController(kc);
-        flyer.setPosition(0, 15);
-
         var sim = new Simulation(env);
-        sim.addFlyer(flyer);
-
-        // scale is in pixels per meter
 
         var renderer = new Renderer({
             sim: sim,
             view: $('#main'),
-            scale: 30
+            scale: 30 // pixels per meter
         });
+
+        // Set up controls
+        //var ctrl = new KeyControls();
+        var ctrl = new ClickControls(renderer);
+
+        // Add a flyer to the sim
+        var flyer = new Flyer();
+        flyer.setController(ctrl);
+        flyer.setPosition(0, 15);
+        sim.addFlyer(flyer);
+
 
         // Set up charts
         var charts = {
