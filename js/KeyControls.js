@@ -49,7 +49,7 @@ KeyControls.prototype.getThrust = function(sensors) {
 
 KeyControls.prototype._targetDelta = function(sensors, target) {
     var dx = sensors.position.x +
-             sensors.velocity.x * this.env.step * 30 -
+             sensors.velocity.x * this.env.step * 50 -
              target.x;
 
     var dy = sensors.position.y +
@@ -70,13 +70,28 @@ KeyControls.prototype._stabilize = function(sensors) {
         };
     }
 
+    // Special case for out-of-control
+    if (sensors.velocity.theta > Math.PI) {
+        return { left: 20, right: 0 };
+    }
+    else if (sensors.velocity.theta > Math.PI) {
+        return { left: 0, right: 20 };
+    }
+
+    // Special case for upside down
+    //if (sensors.position.theta
+
     // Calculating error
     var t = this._targetDelta(sensors, this.session);
 
     // Drive future angle to zero
+    var recovery_angle = t.dx * 0.1;
+    recovery_angle = Math.min(recovery_angle, Math.PI / 4);
+    recovery_angle = Math.max(recovery_angle, -1 * Math.PI / 4);
+
     var s = sensors.position.theta +
             sensors.velocity.theta * this.env.step * 15 -
-            t.dx * 0.05;
+            recovery_angle;
 
     if (s > 0.05) {
         left = Math.min(s * 150, 4);
@@ -87,18 +102,10 @@ KeyControls.prototype._stabilize = function(sensors) {
         left = 0;
     }
 
-    // If we're off to the right, move it over a bit.
-    if (t.dx > 1) {
-        right += Math.min(t.dx * 0.1, 0.5);
-    }
-    else if (t.dx < -1) {
-        left += Math.min(Math.abs(t.dx) * 0.1, 0.5);
-    }
-
     // If we're below the target height, and we're pointed in the right
     // direction, run both engines.
 
-    if ( (t.dy < 0.1) && (Math.abs(s) < (Math.PI / 4)) ) {
+    if ( (t.dy < 0) && (Math.abs(s) < (Math.PI / 4)) ) {
         left += Math.min(Math.abs(t.dy) * 10, 15);
         right += Math.min(Math.abs(t.dy) * 10, 15);
     }
