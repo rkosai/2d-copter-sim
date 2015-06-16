@@ -1,4 +1,4 @@
-function KeyControls() {
+function StableKeyControls() {
     this.q = false; // 81
     this.e = false; // 69
     this.w = false; // 87
@@ -33,7 +33,7 @@ function KeyControls() {
     }.bind(this));
 }
 
-KeyControls.prototype.getThrust = function(sensors) {
+StableKeyControls.prototype.getThrust = function(sensors) {
     if (this.lockLatch) {
         this.autopilot.lockPosition(sensors.position);
         this.lockLatch = false;

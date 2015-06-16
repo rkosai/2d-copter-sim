@@ -2,26 +2,30 @@
 <html>
 <head>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script type="text/javascript" src="js/Chart.js"></script>
-    <script type="text/javascript" src="js/ClickControls.js"></script>
-    <script type="text/javascript" src="js/Sensors.js"></script>
-    <script type="text/javascript" src="js/Environment.js"></script>
-    <script type="text/javascript" src="js/Flyer.js"></script>
-    <script type="text/javascript" src="js/KeyControls.js"></script>
-    <script type="text/javascript" src="js/Renderer.js"></script>
-    <script type="text/javascript" src="js/PositionControl.js"></script>
-    <script type="text/javascript" src="js/Simulation.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script type="text/javascript" src="js/controls/main.js"></script>
+    <script type="text/javascript" src="js/simulation/Chart.js"></script>
+    <script type="text/javascript" src="js/simulation/ClickControls.js"></script>
+    <script type="text/javascript" src="js/simulation/Sensors.js"></script>
+    <script type="text/javascript" src="js/simulation/Environment.js"></script>
+    <script type="text/javascript" src="js/simulation/Flyer.js"></script>
+    <script type="text/javascript" src="js/simulation/KeyControls.js"></script>
+    <script type="text/javascript" src="js/simulation/Renderer.js"></script>
+    <script type="text/javascript" src="js/simulation/PositionControl.js"></script>
+    <script type="text/javascript" src="js/simulation/Simulation.js"></script>
+    <script type="text/javascript" src="js/simulation/StableKeyControls.js"></script>
     <link rel="stylesheet" href="css/index.css">
-
 </head>
-<body>
+<body ng-app="2d-copter-sim">
     <div id="main"></div>
     <div id="pane">
         <div class="heading">CONTROLLER</div>
-        <div class="display">
-            <a class="box selected" href="#">MANUAL</a>
-            <a class="box" href="#">STABILIZE</a>
-            <a class="box" href="#">AUTOPILOT</a>
+        <div class="display" ng-controller="SelectCtrl">
+            <a
+                ng-repeat="o in options"
+                ng-class="class(o)"
+                ng-click="select(o)"
+                href="#">{{o}}</a>
         </div>
         <div class="heading">FLIGHT HISTORY</div>
         <div class="display">
@@ -67,16 +71,10 @@
             scale: 30 // pixels per meter
         });
 
-        // Set up controls
-        //var ctrl = new KeyControls();
-        var ctrl = new ClickControls(renderer);
-
         // Add a flyer to the sim
         var flyer = new Flyer();
-        flyer.setController(ctrl);
         flyer.setPosition(0, 15);
         sim.addFlyer(flyer);
-
 
         // Set up charts
         var charts = {

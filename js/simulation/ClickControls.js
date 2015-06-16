@@ -9,7 +9,6 @@ function ClickControls(renderer) {
                 { x: e.clientX, y: e.clientY }
             );
 
-            console.log('lock', c);
             this.autopilot.lockPosition(c);
         }.bind(this)
     );
