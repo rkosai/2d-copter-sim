@@ -14,6 +14,10 @@ app.factory('ControlService', [function() {
         ];
     };
 
+    ControlService.prototype.getSelected = function() {
+        return this.selected;
+    };
+
     ControlService.prototype.select = function(o) {
         var ctrl;
 
@@ -44,14 +48,13 @@ app.controller('SelectCtrl', [
 
         $scope.class = function(o) {
             var classes = ['box'];
-            if($scope.selected === o) {
+            if(ControlService.getSelected() === o) {
                 classes.push('selected');
             }
             return classes;
         };
 
         $scope.select = function(o) {
-            $scope.selected = o;
             ControlService.select(o);
         };
 
