@@ -66,3 +66,51 @@ body {
     border-left: 1px solid #BBB;
     height: 60px;
 }
+
+#c-popover {
+    background: #39C;
+    box-sizing: border-box;
+    height: 200px;
+    left: calc(50% - 500px);
+    position:absolute;
+    top: calc(50% - 200px);
+    width: 600px;
+    z-index: 1000;
+    padding: 15px;
+}
+
+    .c-popover__title {
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        padding: 18px 30px;
+        color: #FFF;
+    }
+
+    .c-popover__container {
+        float:left;
+        width: 33%;
+    }
+
+    .c-popover__button {
+        background: #EEF;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+        color: #333;
+        display: block;
+        font-size: 13px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        margin:5px 15px;
+        padding: 12px 10px;
+        text-align:center;
+        text-decoration: none;
+    }
+
+    .c-popover__text {
+        text-align:center;
+        color: #FFF;
+        font-size:12px;
+        padding: 10px;
+        line-height: 1.4;
+    }
+

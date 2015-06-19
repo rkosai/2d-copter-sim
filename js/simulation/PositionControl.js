@@ -48,8 +48,14 @@ PositionControl.prototype.getThrust = function(sensors) {
     // direction, run both engines.
 
     if ( (t.dy < 0) && (Math.abs(s) < (Math.PI / 4)) ) {
-        left += Math.min(Math.abs(t.dy) * 10, 15);
-        right += Math.min(Math.abs(t.dy) * 10, 15);
+        left += Math.min(Math.abs(t.dy) * 10, 10);
+        right += Math.min(Math.abs(t.dy) * 10, 10);
+    }
+
+    // If we're pointed upward, and the target is above us.
+    else if ( (t.dy < 0) && (Math.abs(s) < (Math.PI / 2)) ) {
+        left += Math.min(Math.abs(t.dy) * 5, 5);
+        right += Math.min(Math.abs(t.dy) * 5, 5);
     }
 
     return {

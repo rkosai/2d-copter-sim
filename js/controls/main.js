@@ -60,3 +60,17 @@ app.controller('SelectCtrl', [
     }
 ]);
 
+app.controller('StartingCtrl', [
+    '$scope',
+    'ControlService',
+    function ($scope, ControlService) {
+        $scope.started = false;
+
+        $scope.select = function(o) {
+            ControlService.select(o);
+            sim.start();
+            $scope.started = true;
+        };
+    }
+]);
+

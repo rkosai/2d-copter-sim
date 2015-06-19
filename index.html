@@ -17,6 +17,35 @@
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body ng-app="2d-copter-sim">
+    <div id="c-popover" ng-controller="StartingCtrl" ng-hide="started">
+        <div class="c-popover__title">
+            Select a Control System
+        </div>
+        <div class="c-popover__container">
+            <a class="c-popover__button" ng-click="select('MANUAL')" href="#">
+                MANUAL
+            </a>
+            <div class="c-popover__text">
+                Right and left engines<br />with Q and E.
+            </div>
+        </div>
+        <div class="c-popover__container">
+            <a class="c-popover__button" ng-click="select('STABILIZE')" href="#">
+                STABILIZE
+            </a>
+            <div class="c-popover__text">
+                Manual control, but<br />press W to stabilize.
+            </div>
+        </div>
+        <div class="c-popover__container">
+            <a class="c-popover__button" ng-click="select('AUTOPILOT')" href="#">
+                AUTOPILOT
+            </a>
+            <div class="c-popover__text">
+                Full autopilot;<br />click where to go.
+            </div>
+        </div>
+    </div>
     <div id="main"></div>
     <div id="pane">
         <div class="heading">CONTROLLER</div>
@@ -146,7 +175,7 @@
             };
         });
 
-        sim.start();
+        // Simulation is started in StartingCtrl
     </script>
 </body>
 </html>
