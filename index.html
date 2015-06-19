@@ -47,45 +47,45 @@
         </div>
     </div>
     <div id="main"></div>
-    <div id="pane">
-        <div class="heading">CONTROLLER</div>
-        <div class="display" ng-controller="SelectCtrl">
+    <div id="c-pane">
+        <div class="c-pane__heading">CONTROLLER</div>
+        <div class="c-pane__container" ng-controller="SelectCtrl">
             <a
                 ng-repeat="o in options"
                 ng-class="class(o)"
                 ng-click="select(o)"
                 href="#">{{o}}</a>
         </div>
-        <div class="heading">FLIGHT HISTORY</div>
-        <div class="display">
+        <div class="c-pane__heading">FLIGHT HISTORY</div>
+        <div class="c-pane__container">
             <a class="box selected" href="#">NONE</a>
             <a class="box" href="#">DOTS</a>
             <a class="box" href="#">PATH</a>
         </div>
-        <div class="heading">SENSOR DATA</div>
-        <div class="display">
-            <div class="chart-title">Left Engine</div>
-            <div class="chart-container">
+        <div class="c-pane__heading">SENSOR DATA</div>
+        <div class="c-pane__container">
+            <div class="c-chart__title">Left Engine</div>
+            <div class="c-chart__container">
                 <div id="chart_left" class="chart"></div>
             </div>
-            <div class="chart-title">Right Engine</div>
-            <div class="chart-container">
+            <div class="c-chart__title">Right Engine</div>
+            <div class="c-chart__container">
                 <div id="chart_right" class="chart"></div>
             </div>
-            <div class="chart-title">Angular Velocity</div>
-            <div class="chart-container">
+            <div class="c-chart__title">Angular Velocity</div>
+            <div class="c-chart__container">
                 <div id="chart_v_angular" class="chart"></div>
             </div>
-            <div class="chart-title">Vertical Velocity</div>
-            <div class="chart-container">
+            <div class="c-chart__title">Vertical Velocity</div>
+            <div class="c-chart__container">
                 <div id="chart_v_y" class="chart"></div>
             </div>
-            <div class="chart-title">Horizontal Velocity</div>
-            <div class="chart-container">
+            <div class="c-chart__title">Horizontal Velocity</div>
+            <div class="c-chart__container">
                 <div id="chart_v_x" class="chart"></div>
             </div>
-            <div class="chart-title">Angular Position</div>
-            <div class="chart-container">
+            <div class="c-chart__title">Angular Position</div>
+            <div class="c-chart__container">
                 <div id="chart_pos_angular" class="chart"></div>
             </div>
         </div>

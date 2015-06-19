@@ -7,7 +7,7 @@ body {
     position: relative;
 }
 
-#pane {
+#c-pane {
     background: #EEE;
     border-left:3px solid #777;
     box-sizing: border-box;
@@ -20,48 +20,48 @@ body {
     width: 400px;
 }
 
-#pane .heading {
-    font-size: 13px;
-    color: #333;
-    padding: 3px 0;
-    border-bottom: 1px dashed #888;
-}
+    .c-pane__heading {
+        font-size: 13px;
+        color: #333;
+        padding: 3px 0;
+        border-bottom: 1px dashed #888;
+    }
 
-#pane .display {
-    position:relative;
-    padding: 12px 0 16px 0;
-}
+    .c-pane__container {
+        position:relative;
+        padding: 12px 0 16px 0;
+    }
 
-#pane .box {
-    border: 2px solid #BBB;
-    box-sizing: border-box;
-    color: #AAA;
-    display: inline-block;
-    font-size:13px;
-    margin-right:10px;
-    padding:3px 8px;
-    text-align:center;
-    text-decoration: none;
-    width: 100px;
-}
+    .c-pane__container .box {
+        border: 2px solid #BBB;
+        box-sizing: border-box;
+        color: #AAA;
+        display: inline-block;
+        font-size:13px;
+        margin-right:10px;
+        padding:3px 8px;
+        text-align:center;
+        text-decoration: none;
+        width: 100px;
+    }
 
-#pane .box.selected {
-    color: #0A0;
-    border: 3px solid #0A0;
-}
+    .c-pane__container .box.selected {
+        color: #0A0;
+        border: 3px solid #0A0;
+    }
 
-#pane .chart-title {
+.c-chart__title {
     font-size: 13px;
     color: #777;
     padding: 3px 0;
 }
 
-#pane .chart-container {
+.c-chart__container {
     margin-top:3px;
     margin-bottom:10px;
 }
 
-#pane .chart {
+.c-chart__container .chart {
     background: #EEE;
     border-left: 1px solid #BBB;
     height: 60px;
