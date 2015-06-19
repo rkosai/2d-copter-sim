@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body ng-app="2d-copter-sim">
-    <div id="c-popover" ng-controller="StartingCtrl" ng-hide="started">
+    <div class="c-popover" ng-controller="StartingCtrl" ng-hide="started">
         <div class="c-popover__title">
             Select a Control System
         </div>
@@ -46,8 +46,11 @@
             </div>
         </div>
     </div>
+    <div id="alert-message">
+
+    </div>
     <div id="main"></div>
-    <div id="c-pane">
+    <div class="c-pane">
         <div class="c-pane__heading">CONTROLLER</div>
         <div class="c-pane__container" ng-controller="SelectCtrl">
             <a
@@ -64,29 +67,41 @@
         </div>
         <div class="c-pane__heading">SENSOR DATA</div>
         <div class="c-pane__container">
-            <div class="c-chart__title">Left Engine</div>
-            <div class="c-chart__container">
-                <div id="chart_left" class="chart"></div>
+            <div class="c-chart">
+                <div class="c-chart__title">Left Engine</div>
+                <div class="c-chart__container">
+                    <div id="chart_left" class="chart"></div>
+                </div>
             </div>
-            <div class="c-chart__title">Right Engine</div>
-            <div class="c-chart__container">
-                <div id="chart_right" class="chart"></div>
+            <div class="c-chart">
+                <div class="c-chart__title">Right Engine</div>
+                <div class="c-chart__container">
+                    <div id="chart_right" class="chart"></div>
+                </div>
             </div>
-            <div class="c-chart__title">Angular Velocity</div>
-            <div class="c-chart__container">
-                <div id="chart_v_angular" class="chart"></div>
+            <div class="c-chart">
+                <div class="c-chart__title">Angular Velocity</div>
+                <div class="c-chart__container">
+                    <div id="chart_v_angular" class="chart"></div>
+                </div>
             </div>
-            <div class="c-chart__title">Vertical Velocity</div>
-            <div class="c-chart__container">
-                <div id="chart_v_y" class="chart"></div>
+            <div class="c-chart">
+                <div class="c-chart__title">Vertical Velocity</div>
+                <div class="c-chart__container">
+                    <div id="chart_v_y" class="chart"></div>
+                </div>
             </div>
-            <div class="c-chart__title">Horizontal Velocity</div>
-            <div class="c-chart__container">
-                <div id="chart_v_x" class="chart"></div>
+            <div class="c-chart">
+               <div class="c-chart__title">Horizontal Velocity</div>
+                <div class="c-chart__container">
+                    <div id="chart_v_x" class="chart"></div>
+                </div>
             </div>
-            <div class="c-chart__title">Angular Position</div>
-            <div class="c-chart__container">
-                <div id="chart_pos_angular" class="chart"></div>
+            <div class="c-chart">
+               <div class="c-chart__title">Angular Position</div>
+                <div class="c-chart__container">
+                    <div id="chart_pos_angular" class="chart"></div>
+                </div>
             </div>
         </div>
     </div>

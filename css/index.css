@@ -7,7 +7,7 @@ body {
     position: relative;
 }
 
-#c-pane {
+.c-pane {
     background: #EEE;
     border-left:3px solid #777;
     box-sizing: border-box;
@@ -50,24 +50,26 @@ body {
         border: 3px solid #0A0;
     }
 
-.c-chart__title {
-    font-size: 13px;
-    color: #777;
-    padding: 3px 0;
-}
+.c-chart { }
 
-.c-chart__container {
-    margin-top:3px;
-    margin-bottom:10px;
-}
+    .c-chart__title {
+        font-size: 13px;
+        color: #777;
+        padding: 3px 0;
+    }
 
-.c-chart__container .chart {
-    background: #EEE;
-    border-left: 1px solid #BBB;
-    height: 60px;
-}
+    .c-chart__container {
+        margin-top:3px;
+        margin-bottom:10px;
+    }
 
-#c-popover {
+    .c-chart__container .chart {
+        background: #EEE;
+        border-left: 1px solid #BBB;
+        height: 60px;
+    }
+
+.c-popover {
     background: #3A8FBA;
     box-sizing: border-box;
     height: 200px;
