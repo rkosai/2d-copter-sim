@@ -8,7 +8,6 @@ function ClickControls(renderer) {
             var c = this.renderer._pixelToPhysical(
                 { x: e.clientX, y: e.clientY }
             );
-            console.log(c);
 
             this.autopilot.lockPosition(c);
         }.bind(this)

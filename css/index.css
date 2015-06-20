@@ -7,6 +7,18 @@ body {
     position: relative;
 }
 
+.c-alert {
+    position: absolute;
+    width: 600px;
+    top: 200px;
+    left: calc(50% - 500px);
+    z-index: 2000;
+    text-align:center;
+    font-size: 24px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.40);
+}
+
 .c-pane {
     background: #EEE;
     border-left:3px solid #777;
